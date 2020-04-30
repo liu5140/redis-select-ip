@@ -43,6 +43,10 @@ go run main.go  -dsn 'root:111111@tcp(127.0.0.1:3306)/dorama_core?charset=utf8&p
 
 如何使用：
 
+
+
+
+
 type GeoIP struct {
 	ID          int64
 	StartIP     string
@@ -59,6 +63,10 @@ type GeoIP struct {
 
 
 //通过ip 查询具体的省市区
+
+
+
+
 func (service GeoipService) SearchCityByip(ip string) (genBlock GeoIP) {
 	conn := credis.RedisClientManagerInstance().Client().Get()
 	defer conn.Close()
