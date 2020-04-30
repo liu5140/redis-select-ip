@@ -1,0 +1,6 @@
+set character_set_database=utf8;
+
+load data local infile "C:/Users/user/go/src/geo/qqwry.txt" 
+into table geo_lite_city_blocks(start_ip,end_ip,address,node_address);
+
+select *  FROM  geo_lite_city_blocks where  IFNULL(start_ip,0) =0;
