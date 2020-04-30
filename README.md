@@ -2,7 +2,8 @@
 mysql+redis+go实现的本地ip库
 
 1、把qqwry.txt数据导入到mysql中
-表结构
+
+建表语句
 CREATE TABLE`geo_lite_city_blocks`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `created_at` datetime(0) NULL DEFAULT NULL,
