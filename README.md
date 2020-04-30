@@ -4,6 +4,7 @@ mysql+redis+go实现的本地ip库
 1、把qqwry.txt数据导入到mysql中
 
 建表语句
+
 CREATE TABLE`geo_lite_city_blocks`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `created_at` datetime(0) NULL DEFAULT NULL,
@@ -25,8 +26,8 @@ CREATE TABLE`geo_lite_city_blocks`  (
 
 
 mysql 导入语句
-set character_set_database=utf8;
 
+set character_set_database=utf8;
 load data local infile "C:/Users/user/go/src/geo/qqwry.txt" 
 into table geo_lite_city_blocks(start_ip,end_ip,address,node_address);
 
@@ -34,10 +35,11 @@ into table geo_lite_city_blocks(start_ip,end_ip,address,node_address);
 删除不对的数据（不删会报错）
 select *  FROM  geo_lite_city_blocks where  IFNULL(start_ip,0) =0;
 
-2、直接运行即可
+
+
+
+2、直接运行即可（需要带数据库参数）
 go run main.go  -dsn 'root:111111@tcp(127.0.0.1:3306)/dorama_core?charset=utf8&parseTime=True&loc=Local' -redisdsn '127.0.0.1:6379'
-
-
 
 如何使用：
 
@@ -54,6 +56,7 @@ type GeoIP struct {
 	Province    string
 	City        string
 }
+
 
 //通过ip 查询具体的省市区
 func (service GeoipService) SearchCityByip(ip string) (genBlock GeoIP) {
@@ -78,7 +81,6 @@ func (service GeoipService) SearchCityByip(ip string) (genBlock GeoIP) {
 	}
 }
 
-
 func IPToScore(ipAddr string) int64 {
 	score := 0
 	if ipAddr == "::1" {
@@ -91,6 +93,5 @@ func IPToScore(ipAddr string) int64 {
 	ip3, _ := strconv.Atoi(ip[2])
 	ip4, _ := strconv.Atoi(ip[3])
 	score = ip1*256*256*256 + ip2*256*256 + ip3*256 + ip4
-
 	return int64(score)
 }
